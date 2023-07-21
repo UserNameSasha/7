@@ -2,64 +2,63 @@ package ru.netology.stats.javaqamvn.services;
 
  public class StatsService {
 
-     //1
-     public int sum(int[] sales) {
-         int result = 0;
-         for (int sale : sales) {
-             result += sale;
-         }
-         return result;
-     }
-     //2
-     public int average(int[] sales) {
-         int result = sum(sales);
-         return result / sales.length;
-     }
-     //3
-     public int maxMonth(long[] sales){
-         int maxMonth = 0;
-         int month = 0;
+     public long stats(long[] sales) {
+         long total = 0;
          for (long sale : sales) {
-             if (sale >= sales[maxMonth]) {
-                 maxMonth = month;
+             total += sale;
+         }
+         return total;
+     }
+
+
+     public long average(long[] sales) {
+         return stats(sales) / sales.length;
+     }
+
+     public int max(long[] sales) {
+         int maxMonth = 0;
+         long maxSale = sales[0];
+         for (int i = 0; i < sales.length; i++) {
+             if (sales[i] >= maxSale) {
+                 maxSale = sales[i];
+                 maxMonth = i;
              }
-             month = month + 1;
          }
          return maxMonth + 1;
      }
-     //4
-     public int minMonth(long[] sales){
+
+     public int min(long[] sales) {
          int minMonth = 0;
-         int month = 0;
-         for (long sale : sales) {
-             if (sale <= sales[minMonth]) {
-                 minMonth = month;
+         long minSale = sales[0];
+         for (int i = 0; i < sales.length; i++) {
+             if (sales[i] <= minSale) {
+                 minSale = sales[i];
+                 minMonth = i;
              }
-             month = month + 1;
          }
          return minMonth + 1;
      }
-     //5
-     public  int belowAverage(int[] sales) {
+
+     public int belowAverage(long[] sales) {
          int counter = 0;
-         int averageSales = average(sales);
-         for (int i=0; i < sales.length; i++){
-             if (sales[i] < averageSales) {
+         long averageSale = average(sales);
+         for (long sale : sales) {
+             if (sale < averageSale) {
                  counter++;
              }
          }
          return counter;
      }
-     //6
-     public int overAverage(int[] sales) {
-         int count = 0;
-         int salesAvg = average(sales);
-         for (int i = 0; i < sales.length; i++) {
-             if (sales[i] > salesAvg) {
-                 count++;
+
+     public int overAverage(long[] sales) {
+         int counter = 0;
+         long averageSale = average(sales);
+         for (long sale : sales) {
+             if (sale > averageSale) {
+                 counter++;
              }
          }
-         return count;
+         return counter;
      }
  }
 
